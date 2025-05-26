@@ -154,14 +154,64 @@ class Temperature {
 
 class Person{
     constructor(name, age) {
-        this.name = name;
-        this.age = age;
+        this._name = name;
+        this._age = age;
+    }
+
+    get name() {
+      return this._name;
+    }
+
+    get age() {
+      return this._age
+    }
+
+    set name(newName) {
+      if (typeof newName === 'string' && newName.length > 0) {
+        this._name = newName
+      }
+    }
+
+    set age(newAge) {
+      if (typeof newAge === 'number' && newAge > 0){
+        this._age = newAge
+      }
+    }
+
+    toString() {
+      return `${this.name} (${this.age})`;
     }
 }
 
+
+class Student extends Person {
+  #grades;
+
+  constructor(name, age) {
+    super(name, age)
+    this.#grades= []
+  }
+
+  addGrade(grade) {
+    if (typeof grade === 'number' && grade >= 0 && grade <= 100) {
+      this.#grades.push(grade)
+    }
+  }
+
+  get averageGrade() {
+    if (this.#grades.length === 0) return 0;
+    const sum = this.#grades.reduce((acc, val) => acc + val, 0)
+    return sum / this.#grades.length
+  }
+
+  toString() {
+    return `${super.toString()} - Avg Grade: ${this.averageGrade}`
+  }
+}
+
 // Test:
-// const student = new Student('Alice', 20);
-// student.addGrade(90);
-// student.addGrade(80);
-// console.log(student.averageGrade); // 85
-// console.log(student.toString()); // Alice (20) - Avg Grade: 85
+ const student = new Student('Alice', 20);
+ student.addGrade(90);
+ student.addGrade(80);
+ console.log(student.averageGrade); // 85
+ console.log(student.toString()); // Alice (20) - Avg Grade: 85

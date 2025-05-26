@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <button id="modeToggle">Switch to DarkSide</button>
+    <h1>Welcome!</h1>
+    <p>DarkSide or Light?</p>
+
+
+<script>
+    const toggleButton = document.getElementById("modeToggle")
+    const body = document.body
+
+    toggleButton.addEventListener("click", () => {
+        body.classList.toggle("dark-mode")
+
+        if (body.classList.contains("dark-mode")) {
+            toggleButton.textContent= "Want some Light?"
+        } else {
+            toggleButton.textContent = "Switch to DarkSide"
+        }
+    })
+</script>
+</body>
+</html>

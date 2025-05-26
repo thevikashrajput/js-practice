@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label>
+            Name:
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div>
+        </label>
+        <br><br>
+        <label>
+            Email:
+            <input type="email" id="email" name="email">
+            <div id="emailError" class="error"></div>
+        </label>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            document.getElementById('nameError').textContent = ''
+            document.getElementById('emailError').textContent = ''
+
+            let isValid = true
+
+            const name = document.getElementById('name').value.trim()
+            const email = document.getElementById('email').value.trim()
+
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Name is required.'
+                isValid = false
+            }
+
+            if(email === '') {
+                document.getElementById('emailError').textContent = 'Email is required'
+                isValid = false
+            }
+
+            if(!isValid) {
+                event.preventDefault()
+            }
+        });
+    </script>
+</body>
+</html>
